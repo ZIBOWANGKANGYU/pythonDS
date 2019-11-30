@@ -13074,12 +13074,23 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Static-map">Static map<a class="anchor-link" href="#Static-map">&#182;</a></h1><h2 id="Purpose-of-file">Purpose of file<a class="anchor-link" href="#Purpose-of-file">&#182;</a></h2><p>This is a Jupyter notebook of geographical analytics in Python using geopandas shapely and bokeh.</p>
+<h3 id="First-part">First part<a class="anchor-link" href="#First-part">&#182;</a></h3><p>The first part of this file creates a static map showing the nearest distance from anywhere in downtown Stockholm. In addition, it calculates the average public transportation commuting time in the city to the Railway station.</p>
+<h3 id="Second-part">Second part<a class="anchor-link" href="#Second-part">&#182;</a></h3><p>The second part creates a interactive map showing the convenience of public transportation to Railway Station across the city.</p>
+<p>Thanks to <em>Intro to Python GIS</em> course offered <a href="https://automating-gis-processes.github.io/CSC18/index.html">here</a>by CSC Finland, IT Center for Science.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Static map</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#cd &quot;C:/Users/kangyuwang/OneDrive/portfolio/python_geo/Exercise 5&quot;</span>
 </pre></div>
 
     </div>
@@ -13089,38 +13100,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cd</span> <span class="s2">&quot;C:/Users/kangyuwang/OneDrive/portfolio/python_geo/Exercise 5&quot;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>C:\Users\kangyuwang\OneDrive\portfolio\python_geo\Exercise 5
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[191]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Import packages</span>
@@ -13142,10 +13122,29 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\ProgramData\Anaconda3\lib\site-packages\pysal\model\spvcm\abstracts.py:10: UserWarning: The `dill` module is required to use the sqlite backend fully.
+  from .sqlite import head_to_sql, start_sql
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Read data</span>
@@ -13153,6 +13152,7 @@ div#notebook {
 <span class="n">roads</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;dataE5/roads.shp&quot;</span><span class="p">)</span>
 <span class="n">metro</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;dataE5/metro.shp&quot;</span><span class="p">)</span>
 <span class="n">pop</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;dataE5/Vaestotietoruudukko_2015.shp&quot;</span><span class="p">)</span>
+<span class="c1">###CRS of four datasets are set to be identical</span>
 <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3067</span><span class="p">)</span>
 <span class="n">roads</span><span class="o">=</span><span class="n">roads</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3067</span><span class="p">)</span>
 <span class="n">metro</span><span class="o">=</span><span class="n">metro</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3067</span><span class="p">)</span>
@@ -13166,7 +13166,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Exploring data: travel </span>
@@ -13181,7 +13181,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Exploring data: roads and metro</span>
@@ -13199,7 +13199,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13271,31 +13271,21 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Generating distance to nearest road and metro</span>
-<span class="c1">###Combine the roads </span>
+<span class="c1">###Combine the roads into single polyline</span>
 <span class="n">roads</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;for_dissolve&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">roads_uni</span> <span class="o">=</span> <span class="n">roads</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;for_dissolve&quot;</span><span class="p">)</span>
 <span class="n">roads_uni</span><span class="o">=</span><span class="n">roads_uni</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
-<span class="c1">###Combine the metro</span>
+<span class="c1">###Combine the metro into single polyline</span>
 <span class="n">metro</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;for_dissolve&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">metro_uni</span> <span class="o">=</span> <span class="n">metro</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;for_dissolve&quot;</span><span class="p">)</span>
 <span class="n">metro_uni</span><span class="o">=</span><span class="n">metro_uni</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;distance_roads&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">roads_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">roads_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">))]</span>
+<span class="c1">##Calculating the distance of all polygons in the &quot;data&quot; geodataframe to the neaest road and metro</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;distance_roads&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">roads_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">roads_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">))]</span>
 <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;distance_metro&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">metro_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">nearest_points</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">metro_uni</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">))]</span>
 </pre></div>
 
@@ -13306,7 +13296,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Genearting static map</span>
@@ -13346,12 +13336,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Average public transportation commuting time of residents</span>
 <span class="n">pop</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">pop</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">centroid</span><span class="p">)</span>
-<span class="c1">###Use spatial join</span>
+<span class="c1">###The average public transportation comumuting time of each cell in the pop geodataframe is identified as the transportation comumuting time of its centroid </span>
 <span class="n">pop_cen</span><span class="o">=</span><span class="n">pop</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;ASUKKAITA&quot;</span><span class="p">,</span> <span class="s2">&quot;centroid&quot;</span><span class="p">]]</span>
 <span class="n">data_cen</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;pt_r_tt&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
 <span class="n">pop_cen</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ASUKKAITA&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
@@ -13365,12 +13355,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">pop_cen_join</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;pt_r_tt&quot;</span><span class="p">])</span>
-<span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pop_cen_join</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="s2">&quot;pt_r_tt&quot;</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">pop_cen_join</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="s2">&quot;ASUKKAITA&quot;</span><span class="p">])</span>
-<span class="c1">###The average public transportation commute time is</span>
+<span class="n">pt_avrg</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pop_cen_join</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="s2">&quot;pt_r_tt&quot;</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">pop_cen_join</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="s2">&quot;ASUKKAITA&quot;</span><span class="p">])</span>
+<span class="n">f</span><span class="s2">&quot;The average public transportation commute time is </span><span class="si">{pt_avrg}</span><span class="s2"> minutes&quot;</span>
 </pre></div>
 
     </div>
@@ -13383,13 +13373,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[143]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>37.890848795385764</pre>
+<pre>&#39;The average public transportation commute time is 37.890848795385764 minutes&#39;</pre>
 </div>
 
 </div>
@@ -13400,11 +13390,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Interactive map</span>
-<span class="c1">##Add coordinates</span>
+<span class="c1">##Add coordinates in x and y columns so that they can be converted to ColumnDataSource</span>
 <span class="n">roads</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">39</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">roads</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">39</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">roads</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">158</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">roads</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">158</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">exterior</span><span class="o">.</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
@@ -13422,7 +13412,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[164]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Create new variable to meaasure the convenience of public transportation</span>
@@ -13443,7 +13433,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[164]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -13475,10 +13465,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[185]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Classify the pt_con variable</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Classify the pt_con variable: using the Fisher Jenks method</span>
 <span class="n">classifier</span><span class="o">=</span><span class="n">mapclassify</span><span class="o">.</span><span class="n">Fisher_Jenks</span><span class="p">(</span><span class="n">data_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;pt_con&quot;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">data_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span> <span class="p">,</span><span class="s2">&quot;pt_con_clsf&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">classifier</span><span class="p">(</span><span class="n">data_map</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;pt_con&quot;</span><span class="p">])</span>
 <span class="n">d1</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;0-0.562&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;0.562-1.361&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;1.361-1.675&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;1.675-1.980&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;1.980-2.375&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;2.375-4.357&quot;</span><span class="p">}</span>
@@ -13499,18 +13489,18 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\indexing.py:494: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  self.obj[item] = s
-C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\indexing.py:376: SettingWithCopyWarning: 
+<pre>C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\indexing.py:376: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   self.obj[key] = _infer_fill_value(value)
+C:\ProgramData\Anaconda3\lib\site-packages\pandas\core\indexing.py:494: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self.obj[item] = s
 </pre>
 </div>
 </div>
@@ -13521,7 +13511,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[192]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##Making maps</span>
@@ -13573,13 +13563,27 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[192]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\ProgramData\Anaconda3\lib\site-packages\bokeh\io\saving.py:126: UserWarning: save() called but no resources were supplied and output_file(...) was never called, defaulting to resources.CDN
+  warn(&#34;save() called but no resources were supplied and output_file(...) was never called, defaulting to resources.CDN&#34;)
+C:\ProgramData\Anaconda3\lib\site-packages\bokeh\io\saving.py:139: UserWarning: save() called but no title was supplied and output_file(...) was never called, using default title &#39;Bokeh Plot&#39;
+  warn(&#34;save() called but no title was supplied and output_file(...) was never called, using default title &#39;Bokeh Plot&#39;&#34;)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;C:\\Users\\kangyuwang\\OneDrive\\portfolio\\python_geo\\Exercise 5\\accessibility_map_Helsinki.html&#39;</pre>
+<pre>&#39;C:\\Users\\kangyuwang\\OneDrive\\portfolio\\pythonDS\\Exercise 5\\accessibility_map_Helsinki.html&#39;</pre>
 </div>
 
 </div>
