@@ -1,4 +1,0 @@
-name;id;addr
-Work; 1; Paavo Nurmen tie 1, 00250 Helsinki, Finland
-Home; 2; Yliopistonkatu 4, 00100 Helsinki, Finland
-
